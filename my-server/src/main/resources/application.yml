@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: my-server
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/sky-delivery
+    username: root
+    password: 922111xzm!
+
+
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
