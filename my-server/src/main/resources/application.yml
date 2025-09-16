@@ -2,13 +2,21 @@ spring:
   application:
     name: my-server
 
+  profiles:
+      active: prod
+
   datasource:
     url: jdbc:mysql://localhost:3306/sky-delivery
     username: root
-    password: 922111xzm!
+    password: ${z.y.password}
 
 
 
 mybatis:
   #mapper配置文件
   mapper-locations: classpath:mapper/*.xml
+  #mybatis 接受result开启驼峰命名
+  configuration:
+    map-underscore-to-camel-case: true
+
+
