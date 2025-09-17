@@ -34,20 +34,18 @@ public class AdminControllerImp implements AdminController {
 
     //员工登陆 (pending: 返回token)
     @PostMapping("/login")
-    public Result<Emp> adminLogin(@RequestBody EmployeeLoginDTO employee) {
-        String username = employee.getUsername();
-        String password = employee.getPassword();
+    public Result<Emp> adminLogin(@RequestBody EmployeeLoginDTO employeeDTO) {
+        String username = employeeDTO.getUsername();
+        String password = employeeDTO.getPassword();
         Emp employeeRes = adminService.adminLogin(username, password);
-        Result<Emp> res = employeeRes == null ? Result.error("username or password is wrong") : Result.success(employeeRes);
-        return res;
+        return employeeRes == null ? Result.error("username or password is wrong") : Result.success(employeeRes);
     }
 
     //增加员工
     @PostMapping("")
     public Result insertEmp(@RequestBody EmployeeDTO empDTO, HttpServletRequest request) {
-        System.out.println("controller" + request.getHeader("token"));
-        Employee e1 = adminService.insertEmp(empDTO);
-        return new Result(1, "haha", "msg");
+        Employee e1 = adminService.insertEmp(empDTO,request);
+        return Result.success(e1);
     }
 
 

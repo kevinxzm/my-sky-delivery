@@ -18,7 +18,8 @@ public class WebConfig implements WebMvcConfigurer {
     private CommonInterceptor commonInterceptor;
 
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(tokenInterceptor).addPathPatterns("/**").excludePathPatterns("/api/employee/login");
+//        registry.addInterceptor(tokenInterceptor).addPathPatterns("/**").excludePathPatterns("/api/employee/login");
+        registry.addInterceptor(tokenInterceptor).addPathPatterns("/api/employee");
         registry.addInterceptor(commonInterceptor).addPathPatterns("/**");
     }
 
