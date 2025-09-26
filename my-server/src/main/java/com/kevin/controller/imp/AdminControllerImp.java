@@ -2,21 +2,21 @@ package com.kevin.controller.imp;
 
 import com.kevin.DTO.EmployeeDTO;
 import com.kevin.DTO.EmployeeLoginDTO;
+import com.kevin.GlobalBean;
+import com.kevin.context.BaseContext;
 import com.kevin.controller.AdminController;
-import com.kevin.entity.Dish;
-import com.kevin.entity.Emp;
-import com.kevin.entity.Employee;
-import com.kevin.entity.Result;
+import com.kevin.entity.*;
+import com.kevin.entityJPA.EmployeeJPA;
 import com.kevin.mapper.AdminMapper;
 import com.kevin.service.AdminService;
-//import com.kevin.util.PasswordUtil;
-import com.kevin.util.PasswordUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 @RestController
@@ -31,8 +31,11 @@ public class AdminControllerImp implements AdminController {
     @Autowired
     AdminMapper adminMapper;
 
+    @Autowired
+    GlobalBean globalBean;
 
-    //员工登陆 (pending: 返回token)
+
+    // 1.员工登陆 (pending: 返回token)
     @PostMapping("/login")
     public Result<Emp> adminLogin(@RequestBody EmployeeLoginDTO employeeDTO) {
         String username = employeeDTO.getUsername();
@@ -41,11 +44,27 @@ public class AdminControllerImp implements AdminController {
         return employeeRes == null ? Result.error("username or password is wrong") : Result.success(employeeRes);
     }
 
-    //增加员工
+    // 2.增加员工
     @PostMapping("")
     public Result insertEmp(@RequestBody EmployeeDTO empDTO, HttpServletRequest request) {
-        Employee e1 = adminService.insertEmp(empDTO,request);
+        Employee e1 = adminService.insertEmp(empDTO, request);
+        BaseContext.threadLocal.set(123L);
         return Result.success(e1);
+    }
+
+    // 3.查询员工
+
+    @GetMapping("/page")
+    public Result insertEmpPage() {
+        List<EmployeeJPA> empList = adminService.searchEmp();
+
+        PageResult pageResult = new PageResult();
+
+        pageResult.setRecords(empList);
+        pageResult.setTotal(empList.size());
+
+
+        return Result.success(pageResult);
     }
 
 
@@ -60,7 +79,6 @@ public class AdminControllerImp implements AdminController {
 //    public Result insertEmp(String username, String password) {
 //        System.out.println(username);
 //        System.out.println(password);
-//
 //        return new Result(1, "res", "msg");
 //    }
 
@@ -81,7 +99,7 @@ public class AdminControllerImp implements AdminController {
 
 
     @PostMapping("/postTest/{id}")
-    public String ppostTest(@RequestBody Emp emp, @PathVariable int id) {
+    public String postTest(@RequestBody Emp emp, @PathVariable int id) {
         System.out.println(emp);
         System.out.println(id);
 

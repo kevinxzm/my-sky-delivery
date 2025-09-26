@@ -1,10 +1,9 @@
-package com.kevin.entity;
-
+package com.kevin.entityJPA;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
-import java.io.Serializable;
+import javax.persistence.*;
 import java.time.LocalDateTime;
-
 
 
 @Data
@@ -12,10 +11,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Employee implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
+//JPA
+@Entity
+@Table(name = "employee")
+public class EmployeeJPA  {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
@@ -32,10 +34,10 @@ public class Employee implements Serializable {
 
     private Integer status;
 
-    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
-    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
 
     private Long createUser;

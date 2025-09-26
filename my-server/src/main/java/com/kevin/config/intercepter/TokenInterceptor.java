@@ -1,6 +1,8 @@
 package com.kevin.config.intercepter;
 
 
+import com.kevin.context.BaseContext;
+import com.kevin.util.GlobalFn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -14,21 +16,11 @@ public class TokenInterceptor implements HandlerInterceptor {
     private static final Logger log = LoggerFactory.getLogger(TokenInterceptor.class);
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//        return true;
-//        System.out.println(request.getRequestURI());
         String token = request.getHeader("token");
-        log.info("this is toke intercepter,url is {}:, token:{}",request.getRequestURI(), token );
-
+        Long loginUserId = GlobalFn.extractId(request.getHeader("token"));
+//        设置global token id 在 ThreadLocal
+        BaseContext.setTokenId(loginUserId);
         return true;
-
-//        if (token != null && token.equals("token123")) {
-//            return true;
-//        } else {
-//            response.setStatus(401);
-//            return false;
-//        }
-
-
     }
 
 
