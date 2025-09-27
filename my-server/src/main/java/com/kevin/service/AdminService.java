@@ -3,6 +3,7 @@ package com.kevin.service;
 import com.kevin.DTO.EmployeeDTO;
 import com.kevin.entity.Emp;
 import com.kevin.entity.Employee;
+import com.kevin.entity.PageResult;
 import com.kevin.entityJPA.EmployeeJPA;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,5 +21,6 @@ public interface AdminService {
 
     Emp adminLogin(String username, String password);
 
-    List<EmployeeJPA> searchEmp();
+    PageResult searchEmp(String page, String pageSize, String name);
+//    List<EmployeeJPA> searchEmp();
 }

@@ -55,16 +55,9 @@ public class AdminControllerImp implements AdminController {
     // 3.查询员工
 
     @GetMapping("/page")
-    public Result insertEmpPage() {
-        List<EmployeeJPA> empList = adminService.searchEmp();
-
-        PageResult pageResult = new PageResult();
-
-        pageResult.setRecords(empList);
-        pageResult.setTotal(empList.size());
-
-
-        return Result.success(pageResult);
+    public Result insertEmpPage(String page, String pageSize, String name) {
+        PageResult empListPageRes = adminService.searchEmp(page, pageSize, name);
+        return Result.success(empListPageRes);
     }
 
 

@@ -34,13 +34,12 @@ public class AdminServiceImp implements AdminService {
     private static final Logger log = LoggerFactory.getLogger(AdminServiceImp.class);
     @Autowired
     private AdminMapper adminMapper;
-
     @Autowired
     private AdminJPA adminJPA;
-
     @Autowired
     GlobalBean globalBean;
 
+    //1. 登录员工
     @Override
     public Emp adminLogin(String username, String password) {
         Employee employee = adminMapper.adminLogin(username);
@@ -58,41 +57,19 @@ public class AdminServiceImp implements AdminService {
         return result;
     }
 
-
-    // 3.查询员工
-    @Override
-    public List<EmployeeJPA> searchEmp() {
-
-        Pageable pageable = PageRequest.of(1, 3);
-//        Page<EmployeeJPA> empListPage = adminJPA.findAll(pageable);
-//        List<EmployeeJPA> empList= adminJPA.findByUsernameContaining("bbb");
-        Page<EmployeeJPA> empListPage = adminJPA.findByPhoneContaining("1370", pageable);
-
-
-        List<EmployeeJPA> empList = empListPage.getContent();
-        long total = empListPage.getTotalElements();
-        int totalPage = empListPage.getTotalPages();
-
-        System.out.println("total:" + total);
-        System.out.println("totalPage:" + totalPage);
-
-
-        return empList;
-    }
-
+    // 2. 插入员工
     @Override
     public Employee insertEmp(EmployeeDTO empDTO) {
         return doInsertEmp(empDTO, null);
     }
 
-
-    //    1.
+    // 2.1
     @Override
     public Employee insertEmp(EmployeeDTO empDTO, HttpServletRequest request) {
         return doInsertEmp(empDTO, request);
     }
 
-    //    2.
+    // 2.2
     public Employee doInsertEmp(EmployeeDTO empDTO, HttpServletRequest request) {
 
         //   (1)     mybatis
@@ -122,17 +99,35 @@ public class AdminServiceImp implements AdminService {
         return emp;
     }
 
+    // 3.查询员工
+    @Override
+    public PageResult searchEmp(String page, String pageSize, String name) {
+        int pageNum = Integer.parseInt(page) - 1;
+        int pageSizeNum = Integer.parseInt(pageSize);
+        Pageable pageable = PageRequest.of(pageNum, pageSizeNum);
+        Page<EmployeeJPA> empListPage = null;
+        if (name != null && !"".equals(name)) {
+            empListPage = adminJPA.findByUsernameContaining(name, pageable);
+        } else {
+            empListPage = adminJPA.findAll(pageable);
+        }
+        long total = empListPage.getTotalElements();
+
+        List<EmployeeJPA> empList = empListPage.getContent();
+        PageResult pageResult = new PageResult();
+        pageResult.setRecords(empList);
+        pageResult.setTotal(total);
+        return pageResult;
+        //        Page<EmployeeJPA> empListPage = adminJPA.findByPhoneContaining("130", pageable);
+    }
+
 
     public String login() {
         return "login service";
     }
 
-
     public ArrayList searchAllEmp() {
-
         ArrayList empList = adminMapper.searchAllEmp();
-
-
         return empList;
     }
 
