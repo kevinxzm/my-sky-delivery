@@ -1,4 +1,5 @@
 package com.kevin.entityJPA;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
@@ -15,13 +16,15 @@ import java.time.LocalDateTime;
 //JPA
 @Entity
 @Table(name = "employee")
-public class EmployeeJPA  {
+public class EmployeeJPA {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // 账号 username，唯一
     private String username;
 
+    // 员工姓名，可随意
     private String name;
 
     private String password;

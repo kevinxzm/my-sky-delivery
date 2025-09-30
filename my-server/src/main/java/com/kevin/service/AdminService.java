@@ -8,19 +8,20 @@ import com.kevin.entityJPA.EmployeeJPA;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.List;
 
 public interface AdminService {
-    public String login();
-
-    ArrayList searchAllEmp();
-
-    Employee insertEmp(EmployeeDTO emp);
-
-    Employee insertEmp(EmployeeDTO emp, HttpServletRequest request);
 
     Emp adminLogin(String username, String password);
 
+    Employee insertEmp(EmployeeDTO emp);
+    Employee insertEmp(EmployeeDTO emp, HttpServletRequest request);
+
     PageResult searchEmp(String page, String pageSize, String name);
-//    List<EmployeeJPA> searchEmp();
+
+    EmployeeJPA searchEmpById(Long id);
+
+    EmployeeJPA updateEmpById(EmployeeJPA employeeDTO);
+
+    EmployeeJPA updateEmpStatus(Long id, Integer status);
+
 }

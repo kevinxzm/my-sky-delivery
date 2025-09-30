@@ -24,7 +24,6 @@ import java.util.List;
 @Slf4j
 public class AdminControllerImp implements AdminController {
 
-    //    c46d0270-6421-487a-a8f2-cda2a49e82a1
     @Autowired
     AdminService adminService;
 
@@ -38,6 +37,7 @@ public class AdminControllerImp implements AdminController {
     // 1.员工登陆 (pending: 返回token)
     @PostMapping("/login")
     public Result<Emp> adminLogin(@RequestBody EmployeeLoginDTO employeeDTO) {
+        log.info("controller:  controller员工登陆");
         String username = employeeDTO.getUsername();
         String password = employeeDTO.getPassword();
         Emp employeeRes = adminService.adminLogin(username, password);
@@ -47,57 +47,43 @@ public class AdminControllerImp implements AdminController {
     // 2.增加员工
     @PostMapping("")
     public Result insertEmp(@RequestBody EmployeeDTO empDTO, HttpServletRequest request) {
+        log.info("controller:  插入员工 insert");
         Employee e1 = adminService.insertEmp(empDTO, request);
         BaseContext.threadLocal.set(123L);
         return Result.success(e1);
     }
 
     // 3.查询员工
-
     @GetMapping("/page")
-    public Result insertEmpPage(String page, String pageSize, String name) {
+    public Result searchEmpPage(String page, String pageSize, String name) {
+        log.info("controller:  查询员工");
         PageResult empListPageRes = adminService.searchEmp(page, pageSize, name);
         return Result.success(empListPageRes);
     }
 
 
-    @GetMapping("/getAllDish")
-    public ArrayList<Dish> test() {
-        log.info("getAllDish controller");
-        return adminMapper.searchDish();
+    // 4. 查询员工(根据id，回显）
+    @GetMapping("/{id}")
+    public Result searchEmpById(@PathVariable Long id) {
+        log.info("controller:  查询员工(根据id，回显） id:{}", id);
+        EmployeeJPA employee = adminService.searchEmpById(id);
+        return Result.success(employee);
+    }
+
+    //5. 编辑员工信息
+    @PutMapping("")
+    public Result updateEmpById(@RequestBody EmployeeJPA employeeDTO) {
+        log.info("controller:  编辑员工信息 员工:{}", employeeDTO);
+        EmployeeJPA employee = adminService.updateEmpById(employeeDTO);
+        return Result.success(employee);
     }
 
 
-//    @PostMapping("")
-//    public Result insertEmp(String username, String password) {
-//        System.out.println(username);
-//        System.out.println(password);
-//        return new Result(1, "res", "msg");
-//    }
-
-
-    // test api
-    @GetMapping("/getAllDish1")
-    public String test2(@RequestParam(required = false) String name) {
-        return "receive " + (name != null ? name : "nothing");
+    // 6. 编辑员工状态
+    @PostMapping("/status/{status}")
+    public Result updateEmpStatus(@PathVariable Integer status, Long id) {
+        log.info("controller:  编辑员工状态 id:{} to status:{}", id, status);
+        EmployeeJPA employeeRes = adminService.updateEmpStatus(id, status);
+        return Result.success(employeeRes);
     }
-
-    @PostMapping("/getAllEmp")
-    public Result getAllEmp(String testName) {
-        ArrayList x = adminService.searchAllEmp();
-        System.out.println(x);
-
-        return new Result(1, testName, "msg");
-    }
-
-
-    @PostMapping("/postTest/{id}")
-    public String postTest(@RequestBody Emp emp, @PathVariable int id) {
-        System.out.println(emp);
-        System.out.println(id);
-
-        return "res" + emp.getName() + id;
-    }
-
-
 }

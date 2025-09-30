@@ -9,7 +9,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdminJPA extends JpaRepository<EmployeeJPA, Long> {
-
     Page<EmployeeJPA> findByUsernameContaining(String username, Pageable pageable);
-    Page<EmployeeJPA> findByPhoneContaining(String id, Pageable pageable);
 }

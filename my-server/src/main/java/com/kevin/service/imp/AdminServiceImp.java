@@ -49,7 +49,6 @@ public class AdminServiceImp implements AdminService {
             if (flag) {
                 Emp emp = new Emp();
                 BeanUtils.copyProperties(employee, emp);
-                System.out.println("get emp from data" + emp);
                 emp.setToken("tokenid:" + emp.getId());
                 result = emp;
             }
@@ -121,14 +120,54 @@ public class AdminServiceImp implements AdminService {
         //        Page<EmployeeJPA> empListPage = adminJPA.findByPhoneContaining("130", pageable);
     }
 
-
-    public String login() {
-        return "login service";
+    // 4. 查询员工(根据id，回显）
+    @Override
+    public EmployeeJPA searchEmpById(Long id) {
+        return adminJPA.findById(id)
+                .orElseThrow(() -> new RuntimeException("员工不存在，id=" + id));
     }
 
-    public ArrayList searchAllEmp() {
-        ArrayList empList = adminMapper.searchAllEmp();
-        return empList;
+
+    //5. 编辑员工信息
+    @Override
+    public EmployeeJPA updateEmpById(EmployeeJPA employeeFE) {
+        EmployeeJPA employeeDB = adminJPA.findById(employeeFE.getId()).orElse(null);
+        log.info("DB" + adminJPA.toString());
+        if (employeeFE.getName() != null) {
+            employeeDB.setName(employeeFE.getName());
+        }
+        if (employeeFE.getPhone() != null) {
+            employeeDB.setPhone(employeeFE.getPhone());
+        }
+        if (employeeFE.getSex() != null) {
+            employeeDB.setStatus(employeeFE.getStatus());
+        }
+
+        employeeDB.setUpdateTime(LocalDateTime.now());
+        employeeDB.setUpdateUser(BaseContext.getTokenId());
+
+        EmployeeJPA employeeRes = adminJPA.save(employeeDB);
+
+        return employeeRes;
+    }
+
+
+    //6. 编辑员工状态
+    @Override
+    public EmployeeJPA updateEmpStatus(Long id, Integer status) {
+        EmployeeJPA employee = this.searchEmpById(id);
+        employee.setStatus(status);
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getTokenId());
+
+//        EmployeeJPA employeeNew = new EmployeeJPA();
+//        BeanUtils.copyProperties(employee, employeeNew);
+//        employeeNew.setId(55L);
+//        employeeNew.setUsername("new real name");
+        EmployeeJPA employeeRes = adminJPA.save(employee);
+
+
+        return employeeRes;
     }
 
 
