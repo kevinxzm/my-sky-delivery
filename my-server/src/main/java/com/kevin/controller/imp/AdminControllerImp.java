@@ -3,10 +3,12 @@ package com.kevin.controller.imp;
 import com.kevin.DTO.EmployeeDTO;
 import com.kevin.DTO.EmployeeLoginDTO;
 import com.kevin.GlobalBean;
+import com.kevin.ResultEntity.PageResult;
+import com.kevin.ResultEntity.Result;
 import com.kevin.context.BaseContext;
 import com.kevin.controller.AdminController;
 import com.kevin.entity.*;
-import com.kevin.entityJPA.EmployeeJPA;
+import com.kevin.entity.EmployeeJPA;
 import com.kevin.mapper.AdminMapper;
 import com.kevin.service.AdminService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,9 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 
 @RestController

@@ -5,8 +5,8 @@ import com.kevin.GlobalBean;
 import com.kevin.constant.StatusConstant;
 import com.kevin.context.BaseContext;
 import com.kevin.daoJPA.AdminJPA;
-import com.kevin.entity.PageResult;
-import com.kevin.entityJPA.EmployeeJPA;
+import com.kevin.ResultEntity.PageResult;
+import com.kevin.entity.EmployeeJPA;
 import com.kevin.entity.Emp;
 import com.kevin.entity.Employee;
 import com.kevin.mapper.AdminMapper;
@@ -25,7 +25,6 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 

@@ -1,4 +1,4 @@
-package com.kevin.entity;
+package com.kevin.ResultEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

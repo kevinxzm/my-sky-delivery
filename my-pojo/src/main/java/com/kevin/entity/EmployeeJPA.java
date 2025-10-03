@@ -1,4 +1,4 @@
-package com.kevin.entityJPA;
+package com.kevin.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
