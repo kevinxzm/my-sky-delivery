@@ -1,7 +1,6 @@
 package com.kevin.service.imp;
 
 import com.kevin.DTO.EmployeeDTO;
-import com.kevin.GlobalBean;
 import com.kevin.constant.StatusConstant;
 import com.kevin.context.BaseContext;
 import com.kevin.daoJPA.AdminJPA;
@@ -35,8 +34,6 @@ public class AdminServiceImp implements AdminService {
     private AdminMapper adminMapper;
     @Autowired
     private AdminJPA adminJPA;
-    @Autowired
-    GlobalBean globalBean;
 
     //1. 登录员工
     @Override

@@ -2,7 +2,6 @@ package com.kevin.controller.imp;
 
 import com.kevin.DTO.EmployeeDTO;
 import com.kevin.DTO.EmployeeLoginDTO;
-import com.kevin.GlobalBean;
 import com.kevin.ResultEntity.PageResult;
 import com.kevin.ResultEntity.Result;
 import com.kevin.context.BaseContext;
@@ -28,10 +27,6 @@ public class AdminControllerImp implements AdminController {
 
     @Autowired
     AdminMapper adminMapper;
-
-    @Autowired
-    GlobalBean globalBean;
-
 
     // 1.员工登陆 (pending: 返回token)
     @PostMapping("/login")
