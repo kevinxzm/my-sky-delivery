@@ -1,0 +1,11 @@
+# 忽略 Java 编译产物
+*.class
+
+# 忽略 Maven/Gradle 构建目录
+/target/
+/build/
+
+# 忽略 IDE 配置文件（可选）
+*.iml
+/.idea/
+/.vscode/

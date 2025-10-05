@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
     }
 
 
-    // 捕获删除时数据不存在的错误
+    // 捕获删除数据时数据不存在的错误
     @ExceptionHandler(EmptyResultDataAccessException.class)
     public Result handleEmptyResult(EmptyResultDataAccessException e) {
         return Result.error("删除失败，数据不存在: " + e.getMessage());
