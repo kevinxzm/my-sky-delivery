@@ -1,6 +1,8 @@
 package com.kevin.service.imp;
 
 import com.kevin.DTO.EmployeeDTO;
+import com.kevin.Enum.UpdateEnum;
+import com.kevin.aspect.AddDate;
 import com.kevin.constant.StatusConstant;
 import com.kevin.context.BaseContext;
 import com.kevin.daoJPA.AdminJPA;
@@ -126,7 +128,9 @@ public class AdminServiceImp implements AdminService {
 
     //5. 编辑员工信息
     @Override
+    @AddDate(UpdateEnum.UPDATE)
     public EmployeeJPA updateEmpById(EmployeeJPA employeeFE) {
+        System.out.println("----------");
         EmployeeJPA employeeDB = adminJPA.findById(employeeFE.getId()).orElse(null);
         log.info("DB" + adminJPA.toString());
         if (employeeFE.getName() != null) {
@@ -138,9 +142,6 @@ public class AdminServiceImp implements AdminService {
         if (employeeFE.getSex() != null) {
             employeeDB.setStatus(employeeFE.getStatus());
         }
-
-        employeeDB.setUpdateTime(LocalDateTime.now());
-        employeeDB.setUpdateUser(BaseContext.getTokenId());
 
         EmployeeJPA employeeRes = adminJPA.save(employeeDB);
 
@@ -155,14 +156,7 @@ public class AdminServiceImp implements AdminService {
         employee.setStatus(status);
         employee.setUpdateTime(LocalDateTime.now());
         employee.setUpdateUser(BaseContext.getTokenId());
-
-//        EmployeeJPA employeeNew = new EmployeeJPA();
-//        BeanUtils.copyProperties(employee, employeeNew);
-//        employeeNew.setId(55L);
-//        employeeNew.setUsername("new real name");
         EmployeeJPA employeeRes = adminJPA.save(employee);
-
-
         return employeeRes;
     }
 

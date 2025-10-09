@@ -34,6 +34,14 @@
             <artifactId>spring-security-crypto</artifactId>
             <version>5.7.3</version> <!-- 版本和 spring-webmvc 5.3.22 对应 -->
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
     </dependencies>
 
 

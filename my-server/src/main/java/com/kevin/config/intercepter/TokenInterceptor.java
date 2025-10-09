@@ -19,6 +19,8 @@ public class TokenInterceptor implements HandlerInterceptor {
         String token = request.getHeader("token");
         Long loginUserId = GlobalFn.extractId(request.getHeader("token"));
 //        设置global token id 在 ThreadLocal
+
+        System.out.println("interceptor:" + loginUserId);
         BaseContext.setTokenId(loginUserId);
         return true;
     }

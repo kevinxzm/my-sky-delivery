@@ -10,4 +10,5 @@ public interface CategoryService {
     Category updateCategoryStatusById(Long id, Integer status);
     Category updateCategory(Category category);
     Result deleteCategory(Long id);
+    Category updateCategoryFields(Category categoryFE);
 }

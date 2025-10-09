@@ -27,7 +27,6 @@ public class CategoryControllerImp implements CategoryController {
         Category categoryRes = categoryService.updateCategory(category);
         return Result.success(categoryRes);
     }
-
     @DeleteMapping("")
     public Result updateCategory(Long id) {
         return categoryService.deleteCategory(id);
