@@ -3,7 +3,7 @@ package com.kevin.service.imp;
 import com.kevin.DTO.CategoryDTO;
 import com.kevin.Enum.UpdateEnum;
 import com.kevin.ResultEntity.CategoryPageResult;
-import com.kevin.aspect.AddDate;
+import com.kevin.aspect.AutoFillDateUser;
 import com.kevin.context.BaseContext;
 import com.kevin.daoJPA.CategoryJPA;
 import com.kevin.daoJPA.DishJPA;
@@ -60,7 +60,7 @@ public class CategoryServiceImp implements CategoryService {
     }
 
     @Override
-    @AddDate(UpdateEnum.ADD)
+    @AutoFillDateUser(UpdateEnum.ADD)
     public Category createCategory(Category category) {
         category.setStatus(0);
 //        category.setCreateTime(LocalDateTime.now());
@@ -96,7 +96,7 @@ public class CategoryServiceImp implements CategoryService {
 
 
 
-    @AddDate(UpdateEnum.UPDATE)
+    @AutoFillDateUser(UpdateEnum.UPDATE)
     public Category updateCategoryFields(Category categoryFE) {
         Category categoryDB = categoryJPA.findById(categoryFE.getId()).orElseThrow(() -> new EntityNotFoundException("Category not found for id: " + categoryFE.getId()));
         ;

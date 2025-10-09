@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
 
 @Aspect
 @Component
-public class AspectTest {
-    private static final Logger log = LoggerFactory.getLogger(AspectTest.class);
+public class AutoFillDateUserAspect {
+    private static final Logger log = LoggerFactory.getLogger(AutoFillDateUserAspect.class);
 
     @Around("execution(* com.kevin.controller.imp.AdminControllerImp.*(..))")
     public Object adminControllerAspect(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -39,7 +39,7 @@ public class AspectTest {
     }
 
 
-    @Before("@annotation(com.kevin.aspect.AddDate)")
+    @Before("@annotation(com.kevin.aspect.AutoFillDateUser)")
     public void beforeAddDate(JoinPoint joinPoint) throws Exception {
         //拿到方法和参数的相关信息
         log.info(joinPoint.getTarget().getClass().getName());
@@ -52,7 +52,7 @@ public class AspectTest {
 
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
-        AddDate addDate = method.getAnnotation(AddDate.class);
+        AutoFillDateUser addDate = method.getAnnotation(AutoFillDateUser.class);
         UpdateEnum value = addDate.value();
 
         Method setUpdateTime;
@@ -71,9 +71,7 @@ public class AspectTest {
             setCreateUser.invoke(args[0], BaseContext.getTokenId());
         }
 
-
-        System.out.println("arg111" + args[0]);
-
+        System.out.println("after auto fill date user aspect" + args[0]);
 
     }
 

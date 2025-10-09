@@ -1,7 +1,7 @@
 package com.kevin.service.imp;
 
 import com.kevin.Enum.UpdateEnum;
-import com.kevin.aspect.AddDate;
+import com.kevin.aspect.AutoFillDateUser;
 import com.kevin.context.BaseContext;
 import com.kevin.daoJPA.CategoryJPA;
 import com.kevin.entity.Category;
@@ -19,7 +19,7 @@ public class CategoryUpdater {
     @Autowired
     CategoryJPA categoryJPA;
 
-    @AddDate(UpdateEnum.UPDATE)
+    @AutoFillDateUser(UpdateEnum.UPDATE)
     public Category updateCategoryFields(Category categoryFE) {
         log.info("CategoryServiceImp.updateCategoryFields!!!：{}", categoryFE.toString());
         System.out.println("!!!" + BaseContext.getTokenId());

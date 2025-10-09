@@ -2,7 +2,7 @@ package com.kevin.service.imp;
 
 import com.kevin.DTO.EmployeeDTO;
 import com.kevin.Enum.UpdateEnum;
-import com.kevin.aspect.AddDate;
+import com.kevin.aspect.AutoFillDateUser;
 import com.kevin.constant.StatusConstant;
 import com.kevin.context.BaseContext;
 import com.kevin.daoJPA.AdminJPA;
@@ -128,7 +128,7 @@ public class AdminServiceImp implements AdminService {
 
     //5. 编辑员工信息
     @Override
-    @AddDate(UpdateEnum.UPDATE)
+    @AutoFillDateUser(UpdateEnum.UPDATE)
     public EmployeeJPA updateEmpById(EmployeeJPA employeeFE) {
         System.out.println("----------");
         EmployeeJPA employeeDB = adminJPA.findById(employeeFE.getId()).orElse(null);
