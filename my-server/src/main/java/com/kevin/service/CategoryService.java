@@ -3,6 +3,9 @@ import com.kevin.DTO.CategoryDTO;
 import com.kevin.ResultEntity.Result;
 import com.kevin.entity.Category;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public interface CategoryService {
     Result getCategoryPage(CategoryDTO categoryDTO);
@@ -11,4 +14,6 @@ public interface CategoryService {
     Category updateCategory(Category category);
     Result deleteCategory(Long id);
     Category updateCategoryFields(Category categoryFE);
+
+    List<Category> getCategoryByType(Integer type);
 }

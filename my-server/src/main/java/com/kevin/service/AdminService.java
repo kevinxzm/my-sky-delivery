@@ -12,8 +12,8 @@ public interface AdminService {
 
     Emp adminLogin(String username, String password);
 
-    Employee insertEmp(EmployeeDTO emp);
-    Employee insertEmp(EmployeeDTO emp, HttpServletRequest request);
+    Employee saveEmp(EmployeeDTO emp);
+    Employee saveEmp(EmployeeDTO emp, HttpServletRequest request);
 
     PageResult searchEmp(String page, String pageSize, String name);
 

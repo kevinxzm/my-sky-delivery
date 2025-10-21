@@ -14,7 +14,7 @@ public class CorsFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        System.out.println("Filter function " + request.getMethod() + " " + request.getRequestURI());
+        System.out.println("Cors" + "Filter function " + request.getMethod() + " " + request.getRequestURI());
         //解决跨域
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");

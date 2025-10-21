@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public interface CategoryJPA extends JpaRepository<Category, Long> {
@@ -20,6 +22,9 @@ public interface CategoryJPA extends JpaRepository<Category, Long> {
     Page<Category> getCategoryPage(@Param("name1") String name1,
                                    @Param("type") Integer type,
                                    Pageable pageable);
+
+
+    List<Category> findByType(Integer type);
 
 
 }

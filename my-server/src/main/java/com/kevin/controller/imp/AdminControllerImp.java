@@ -18,7 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @RestController
-@RequestMapping("/api/employee")
+//@RequestMapping("/api/employee")
+@RequestMapping("/employee")
 @Slf4j
 public class AdminControllerImp implements AdminController {
 
@@ -42,7 +43,7 @@ public class AdminControllerImp implements AdminController {
     @PostMapping("")
     public Result insertEmp(@RequestBody EmployeeDTO empDTO, HttpServletRequest request) {
         log.info("controller:  插入员工 insert");
-        Employee e1 = adminService.insertEmp(empDTO, request);
+        Employee e1 = adminService.saveEmp(empDTO, request);
         BaseContext.threadLocal.set(123L);
         return Result.success(e1);
     }

@@ -9,3 +9,5 @@
 *.iml
 /.idea/
 /.vscode/
+application-prod.yml
+application-dev.yml

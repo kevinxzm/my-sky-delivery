@@ -11,7 +11,7 @@ public class CommonInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("request URL 222222..........." + request.getRequestURI());
+        System.out.println("Intercepter 1 URI: " + request.getRequestURI());
         return true;
     }
 

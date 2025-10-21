@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -114,5 +115,10 @@ public class CategoryServiceImp implements CategoryService {
         categoryDB.setUpdateTime(LocalDateTime.now());
         categoryDB.setUpdateUser(BaseContext.getTokenId());
         return categoryJPA.save(categoryDB);
+    }
+
+    @Override
+    public List<Category> getCategoryByType(Integer type) {
+        return categoryJPA.findByType(type);
     }
 }

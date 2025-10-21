@@ -20,3 +20,10 @@ mybatis:
     map-underscore-to-camel-case: true
 
 
+
+aws-config:
+  accessKey: ${aws-config-pro.accessKey}
+  secretKey: ${aws-config-pro.secretKey}
+  bucketName: ${aws-config-pro.bucketName}
+  region: ${aws-config-pro.region}
+

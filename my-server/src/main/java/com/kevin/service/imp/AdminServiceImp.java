@@ -56,13 +56,13 @@ public class AdminServiceImp implements AdminService {
 
     // 2. 插入员工
     @Override
-    public Employee insertEmp(EmployeeDTO empDTO) {
+    public Employee saveEmp(EmployeeDTO empDTO) {
         return doInsertEmp(empDTO, null);
     }
 
     // 2.1
     @Override
-    public Employee insertEmp(EmployeeDTO empDTO, HttpServletRequest request) {
+    public Employee saveEmp(EmployeeDTO empDTO, HttpServletRequest request) {
         return doInsertEmp(empDTO, request);
     }
 
@@ -78,7 +78,6 @@ public class AdminServiceImp implements AdminService {
         emp.setUpdateTime(LocalDateTime.now());
         emp.setCreateUser(BaseContext.getTokenId());
         emp.setUpdateUser(BaseContext.getTokenId());
-//        adminMapper.insertEmp(emp);
 
 //        (2) JPA
         EmployeeJPA empJPA = new EmployeeJPA();
