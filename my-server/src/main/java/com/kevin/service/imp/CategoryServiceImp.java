@@ -6,7 +6,6 @@ import com.kevin.ResultEntity.CategoryPageResult;
 import com.kevin.aspect.AutoFillDateUser;
 import com.kevin.context.BaseContext;
 import com.kevin.daoJPA.CategoryJPA;
-import com.kevin.daoJPA.DishJPA;
 import com.kevin.entity.Category;
 import com.kevin.ResultEntity.Result;
 import com.kevin.entity.Dish;
@@ -36,7 +35,7 @@ public class CategoryServiceImp implements CategoryService {
     CategoryService selfProxy;
 
     @Autowired
-    DishJPA dishJPA;
+    com.kevin.daoJPA.DishJPA dishJPA;
 
 //    @Autowired
 //    CategoryUpdater categoryUpdater;
