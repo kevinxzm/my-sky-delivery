@@ -1,7 +1,9 @@
 package com.kevin.service.imp;
 
 import com.kevin.DTO.DishDTO;
+import com.kevin.DTO.DishPageDTO;
 import com.kevin.Enum.UpdateEnum;
+import com.kevin.ResultEntity.Result;
 import com.kevin.aspect.AutoFillDateUser;
 import com.kevin.daoJPA.DishFlavorJPA;
 import com.kevin.daoJPA.DishJPA;
@@ -40,11 +42,14 @@ public class DishServiceImp implements DishService {
             dishFlavor.setDishId(dish.getId());
         }
 
-        if (true) {
-            throw new RuntimeException("手动测试事务回滚！");
-        }
-
         dishFlavorJPA.saveAll(dishFlavors);
+
+    }
+
+    @Override
+    public Result getDishPage(DishPageDTO dishPageDTO) {
+
+        return Result.success("123");
 
     }
 }

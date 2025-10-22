@@ -3,7 +3,7 @@ package com.kevin.service;
 import com.kevin.DTO.EmployeeDTO;
 import com.kevin.entity.Emp;
 import com.kevin.entity.Employee;
-import com.kevin.ResultEntity.PageResult;
+import com.kevin.ResultEntity.EmpPageResult;
 import com.kevin.entity.EmployeeJPA;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +15,7 @@ public interface AdminService {
     Employee saveEmp(EmployeeDTO emp);
     Employee saveEmp(EmployeeDTO emp, HttpServletRequest request);
 
-    PageResult searchEmp(String page, String pageSize, String name);
+    EmpPageResult searchEmp(String page, String pageSize, String name);
 
     EmployeeJPA searchEmpById(Long id);
 

@@ -1,14 +1,13 @@
 package com.kevin.service;
-import com.kevin.DTO.CategoryDTO;
+import com.kevin.DTO.CategoryPageDTO;
 import com.kevin.ResultEntity.Result;
 import com.kevin.entity.Category;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 public interface CategoryService {
-    Result getCategoryPage(CategoryDTO categoryDTO);
+    Result getCategoryPage(CategoryPageDTO categoryPageDTO);
     Category createCategory(Category category);
     Category updateCategoryStatusById(Long id, Integer status);
     Category updateCategory(Category category);

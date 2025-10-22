@@ -1,6 +1,6 @@
 package com.kevin.controller.imp;
 
-import com.kevin.DTO.CategoryDTO;
+import com.kevin.DTO.CategoryPageDTO;
 import com.kevin.controller.CategoryController;
 import com.kevin.ResultEntity.Result;
 import com.kevin.entity.Category;
@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -42,8 +41,8 @@ public class CategoryControllerImp implements CategoryController {
 
 
     @GetMapping("/page")
-    public Result getCategoryPage(CategoryDTO categoryDTO) {
-        return categoryService.getCategoryPage(categoryDTO);
+    public Result getCategoryPage(CategoryPageDTO categoryPageDTO) {
+        return categoryService.getCategoryPage(categoryPageDTO);
 
     }
 

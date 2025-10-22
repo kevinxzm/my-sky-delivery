@@ -1,6 +1,6 @@
 package com.kevin.service.imp;
 
-import com.kevin.DTO.CategoryDTO;
+import com.kevin.DTO.CategoryPageDTO;
 import com.kevin.Enum.UpdateEnum;
 import com.kevin.ResultEntity.CategoryPageResult;
 import com.kevin.aspect.AutoFillDateUser;
@@ -22,7 +22,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,15 +43,15 @@ public class CategoryServiceImp implements CategoryService {
 
 
     @Override
-    public Result getCategoryPage(CategoryDTO categoryDTO) {
+    public Result getCategoryPage(CategoryPageDTO categoryPageDTO) {
         log.info("Service: get category page, name={}, type={}, page={}, pageSize={}",
-                categoryDTO.getName(), categoryDTO.getType(), categoryDTO.getPage(), categoryDTO.getPageSize());
+                categoryPageDTO.getName(), categoryPageDTO.getType(), categoryPageDTO.getPage(), categoryPageDTO.getPageSize());
 
-        int pageNum = categoryDTO.getPage() - 1;
-        int pageSizeNum = categoryDTO.getPageSize();
+        int pageNum = categoryPageDTO.getPage() - 1;
+        int pageSizeNum = categoryPageDTO.getPageSize();
 
         Pageable pageable = PageRequest.of(pageNum, pageSizeNum);
-        Page<Category> listPage = categoryJPA.getCategoryPage(categoryDTO.getName(), categoryDTO.getType(), pageable);
+        Page<Category> listPage = categoryJPA.getCategoryPage(categoryPageDTO.getName(), categoryPageDTO.getType(), pageable);
         List<Category> list = listPage.getContent();
         CategoryPageResult categoryPageResult = new CategoryPageResult();
         categoryPageResult.setTotal(listPage.getTotalElements());

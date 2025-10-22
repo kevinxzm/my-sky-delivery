@@ -2,7 +2,7 @@ package com.kevin.controller.imp;
 
 import com.kevin.DTO.EmployeeDTO;
 import com.kevin.DTO.EmployeeLoginDTO;
-import com.kevin.ResultEntity.PageResult;
+import com.kevin.ResultEntity.EmpPageResult;
 import com.kevin.ResultEntity.Result;
 import com.kevin.context.BaseContext;
 import com.kevin.controller.AdminController;
@@ -52,7 +52,7 @@ public class AdminControllerImp implements AdminController {
     @GetMapping("/page")
     public Result searchEmpPage(String page, String pageSize, String name) {
         log.info("controller:  查询员工");
-        PageResult empListPageRes = adminService.searchEmp(page, pageSize, name);
+        EmpPageResult empListPageRes = adminService.searchEmp(page, pageSize, name);
         return Result.success(empListPageRes);
     }
 

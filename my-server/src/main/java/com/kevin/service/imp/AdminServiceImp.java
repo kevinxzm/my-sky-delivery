@@ -6,7 +6,7 @@ import com.kevin.aspect.AutoFillDateUser;
 import com.kevin.constant.StatusConstant;
 import com.kevin.context.BaseContext;
 import com.kevin.daoJPA.AdminJPA;
-import com.kevin.ResultEntity.PageResult;
+import com.kevin.ResultEntity.EmpPageResult;
 import com.kevin.entity.EmployeeJPA;
 import com.kevin.entity.Emp;
 import com.kevin.entity.Employee;
@@ -97,7 +97,7 @@ public class AdminServiceImp implements AdminService {
 
     // 3.查询员工
     @Override
-    public PageResult searchEmp(String page, String pageSize, String name) {
+    public EmpPageResult searchEmp(String page, String pageSize, String name) {
         int pageNum = Integer.parseInt(page) - 1;
         int pageSizeNum = Integer.parseInt(pageSize);
         Pageable pageable = PageRequest.of(pageNum, pageSizeNum);
@@ -110,10 +110,10 @@ public class AdminServiceImp implements AdminService {
         long total = empListPage.getTotalElements();
 
         List<EmployeeJPA> empList = empListPage.getContent();
-        PageResult pageResult = new PageResult();
-        pageResult.setRecords(empList);
-        pageResult.setTotal(total);
-        return pageResult;
+        EmpPageResult empPageResult = new EmpPageResult();
+        empPageResult.setRecords(empList);
+        empPageResult.setTotal(total);
+        return empPageResult;
         //        Page<EmployeeJPA> empListPage = adminJPA.findByPhoneContaining("130", pageable);
     }
 
