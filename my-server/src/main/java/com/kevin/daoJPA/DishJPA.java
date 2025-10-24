@@ -10,11 +10,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
 public interface DishJPA extends JpaRepository<Dish, Long> {
     List<Dish> findByCategoryId(Long id);
+
+    Optional<Dish> findById(Long id);
 
     @Query("SELECT d.id AS id, d.name AS name, d.price AS price, d.categoryId AS categoryId, " +
             "c.name AS categoryName, d.image AS image, d.description AS description, d.status AS status, " +

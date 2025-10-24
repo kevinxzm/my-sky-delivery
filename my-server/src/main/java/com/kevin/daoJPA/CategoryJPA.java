@@ -17,9 +17,9 @@ public interface CategoryJPA extends JpaRepository<Category, Long> {
     Page<Category> findByNameContainingAndType(String name, Integer type, Pageable pageable);
 
     @Query("select c from Category c " +
-            "where (:name1 is null or c.name like concat('%', :name1, '%')) " +
+            "where (:name is null or c.name like concat('%', :name, '%')) " +
             "and (:type is null or c.type = :type)")
-    Page<Category> getCategoryPage(@Param("name1") String name1,
+    Page<Category> getCategoryPage( String name,
                                    @Param("type") Integer type,
                                    Pageable pageable);
 

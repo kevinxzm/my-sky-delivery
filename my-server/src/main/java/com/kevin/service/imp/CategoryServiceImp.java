@@ -37,10 +37,6 @@ public class CategoryServiceImp implements CategoryService {
     @Autowired
     com.kevin.daoJPA.DishJPA dishJPA;
 
-//    @Autowired
-//    CategoryUpdater categoryUpdater;
-
-
     @Override
     public Result getCategoryPage(CategoryPageDTO categoryPageDTO) {
         log.info("Service: get category page, name={}, type={}, page={}, pageSize={}",
@@ -84,9 +80,9 @@ public class CategoryServiceImp implements CategoryService {
     }
 
     @Override
-    public Result deleteCategory(Long id) {
+    public Result<String> deleteCategory(Long id) {
         List<Dish> dishList = dishJPA.findByCategoryId(id);
-        if (dishList.size() > 0) {
+        if (!dishList.isEmpty()) {
             return Result.error("有数据不能删");
         }
         categoryJPA.deleteById(id);

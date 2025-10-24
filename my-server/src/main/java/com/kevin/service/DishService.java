@@ -4,7 +4,11 @@ import com.kevin.DTO.DishDTO;
 import com.kevin.DTO.DishPageDTO;
 import com.kevin.ResultEntity.Result;
 
+import java.util.List;
+
 public interface DishService {
-    void saveDish(DishDTO dishDTO);
+    Result saveDish(DishDTO dishDTO);
     Result getDishPage(DishPageDTO dishPageDTO);
+
+    Result deleteDishBatch(List<Long> ids) throws Exception;
 }

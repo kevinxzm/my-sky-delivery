@@ -21,7 +21,7 @@ public class Result<T> {
         return new Result<>(1, "success", data);
     }
 
-    public static Result<?> success(String msg) {
+    public static Result<String> success(String msg) {
         return new Result<>(1, msg, null);
     }
 
