@@ -8,10 +8,7 @@ import com.kevin.ResultEntity.Result;
 import com.kevin.aspect.AutoFillDateUser;
 import com.kevin.daoJPA.DishFlavorJPA;
 import com.kevin.daoJPA.SetMealDishJPA;
-import com.kevin.entity.Dish;
-import com.kevin.entity.DishFlavor;
-import com.kevin.entity.DishWithCategoryProjection;
-import com.kevin.entity.SetMealDish;
+import com.kevin.entity.*;
 import com.kevin.service.DishService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,10 +86,50 @@ public class DishServiceImp implements DishService {
         }
         log.info("all the ids are able to be deleted");
         dishJPA.deleteAllById(ids);
-        dishFlavorJPA.deleteAllByDishNames(ids);
-
+        dishFlavorJPA.deleteAllByDishIds(ids);
         return Result.success("Dishes deleted successfully");
     }
+
+    @Override
+    public Result<DishDTO> getDishById(Long id) {
+        Dish dish = dishJPA.findById(id).orElse(null);
+
+        List<DishFlavor> dishFlavorsList = dishFlavorJPA.findByDishId(id);
+
+        DishDTO dishDTO = new DishDTO();
+        BeanUtils.copyProperties(dish, dishDTO);
+
+        dishDTO.setFlavors(new ArrayList<>(dishFlavorsList));
+
+        return Result.success(dishDTO);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    @AutoFillDateUser(UpdateEnum.UPDATE)
+    public Result updateDish(DishDTO dishDTO) {
+        Dish dish = new Dish();
+        BeanUtils.copyProperties(dishDTO, dish);
+
+        // 第一个数据库请求；
+        this.dishJPA.save(dish);
+        ArrayList<DishFlavor> dishFlavors = dishDTO.getFlavors();
+        dishFlavorJPA.deleteByDishId(dish.getId());
+        for (DishFlavor dishFlavor : dishFlavors) {
+            dishFlavor.setDishId(dish.getId());
+        }
+        dishFlavorJPA.saveAll(dishFlavors);
+        return Result.success("update successfully");
+    }
+
+    @Override
+    public Result updateDishStatusById(Long id, Integer status) {
+        Dish dish = dishJPA.findById(id).orElseThrow(() -> new RuntimeException("can not find"));
+        dish.setStatus(status);
+        this.dishJPA.save(dish);
+        return Result.success("status update successfully");
+    }
+
 
     private Optional<String> validateDishBeforeDelete(Long id) {
         Dish dish = dishJPA.findById(id).orElseThrow(() -> new RuntimeException("can not find"));

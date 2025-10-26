@@ -21,6 +21,14 @@ public class DishControllerImp implements DishController {
     @Autowired
     private DishService dishService;
 
+    @GetMapping("/{id}")
+    public Result<DishDTO> getDishById(@PathVariable Long id) {
+        log.info("getDishById id:{}", id);
+        return dishService.getDishById(id);
+
+    }
+
+
     @PostMapping("")
     public Result saveDish(@RequestBody DishDTO dishDTO) {
         return dishService.saveDish(dishDTO);
@@ -36,6 +44,17 @@ public class DishControllerImp implements DishController {
     @DeleteMapping("")
     public Result deleteDish(@RequestParam List<Long> ids) throws Exception {
         return dishService.deleteDishBatch(ids);
+    }
+
+
+    @PutMapping("")
+    public Result updateDish(@RequestBody DishDTO dishDTO) {
+        return dishService.updateDish(dishDTO);
+    }
+
+    @PostMapping("/status/{status}")
+    public Result updateDishStatus(@PathVariable Integer status, @RequestParam Long id) {
+           return dishService.updateDishStatusById(id, status);
     }
 
 

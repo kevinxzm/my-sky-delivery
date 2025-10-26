@@ -14,6 +14,11 @@ public interface DishFlavorJPA extends JpaRepository<DishFlavor, Long> {
     @Transactional
     @Modifying
     @Query("DELETE FROM DishFlavor d WHERE d.dishId IN :ids")
-    void deleteAllByDishNames( List<Long> ids);
+    void deleteAllByDishIds(List<Long> ids);
+
+    void deleteByDishId(Long id);
+
+    List<DishFlavor> findByDishId(Long dishId);
+
 
 }
