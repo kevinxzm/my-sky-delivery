@@ -114,15 +114,22 @@ public class DishServiceImp implements DishService {
         // 第一个数据库请求；
         this.dishJPA.save(dish);
         ArrayList<DishFlavor> dishFlavors = dishDTO.getFlavors();
+
         dishFlavorJPA.deleteByDishId(dish.getId());
-        for (DishFlavor dishFlavor : dishFlavors) {
-            dishFlavor.setDishId(dish.getId());
+        System.out.println("flavors " + dishDTO.getFlavors());
+        if (dishDTO.getFlavors().size() > 0) {
+            for (DishFlavor dishFlavor : dishFlavors) {
+                dishFlavor.setDishId(dish.getId());
+            }
+            dishFlavorJPA.saveAll(dishFlavors);
+
         }
-        dishFlavorJPA.saveAll(dishFlavors);
+
         return Result.success("update successfully");
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Result updateDishStatusById(Long id, Integer status) {
         Dish dish = dishJPA.findById(id).orElseThrow(() -> new RuntimeException("can not find"));
         dish.setStatus(status);

@@ -23,7 +23,6 @@ public class DishControllerImp implements DishController {
 
     @GetMapping("/{id}")
     public Result<DishDTO> getDishById(@PathVariable Long id) {
-        log.info("getDishById id:{}", id);
         return dishService.getDishById(id);
 
     }
@@ -54,7 +53,7 @@ public class DishControllerImp implements DishController {
 
     @PostMapping("/status/{status}")
     public Result updateDishStatus(@PathVariable Integer status, @RequestParam Long id) {
-           return dishService.updateDishStatusById(id, status);
+        return dishService.updateDishStatusById(id, status);
     }
 
 

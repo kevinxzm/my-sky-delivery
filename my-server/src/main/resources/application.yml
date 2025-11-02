@@ -3,12 +3,19 @@ spring:
     name: my-server
 
   profiles:
-      active: prod
+    active: prod
 
   datasource:
     url: jdbc:mysql://localhost:3306/sky-delivery
     username: root
     password: ${z.y.password}
+
+
+  redis:
+    database: ${spring-redis-pro.database}
+    host: ${spring-redis-pro.host}
+    port: ${spring-redis-pro.port}
+    password: ${spring-redis-pro.password}
 
 
 
@@ -26,4 +33,5 @@ aws-config:
   secretKey: ${aws-config-pro.secretKey}
   bucketName: ${aws-config-pro.bucketName}
   region: ${aws-config-pro.region}
+
 
