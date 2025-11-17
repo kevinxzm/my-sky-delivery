@@ -17,6 +17,23 @@ spring:
     port: ${spring-redis-pro.port}
     password: ${spring-redis-pro.password}
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${google-prod.client-id}
+            client-secret: ${google-prod.client-secret}
+            scope:
+              - email
+              - profile
+        provider:
+          google:
+            authorization-uri: ${google-prod.authorization-uri}
+            token-uri: ${google-prod.token-uri}
+            user-info-uri: ${google-prod.user-info-uri}
+            user-name-attribute: ${google-prod.user-name-attribute}
+
 
 
 mybatis:

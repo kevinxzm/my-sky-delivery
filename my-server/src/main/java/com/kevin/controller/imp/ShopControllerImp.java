@@ -25,7 +25,9 @@ public class ShopControllerImp implements ShopController {
         if (status == null) {
             return Result.error("Status not found in Redis");
         }
+        // 1 是营业，0是打烊
         return Result.success(Integer.parseInt(status.toString()));
+//        return Result.success(status.toString());
     }
 
 
